@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/game-of-21/static/css/main.8c1859e9.css",
+    "main.js": "/game-of-21/static/js/main.3f38f0e4.js",
+    "static/js/787.28d8fdef.chunk.js": "/game-of-21/static/js/787.28d8fdef.chunk.js",
+    "index.html": "/game-of-21/index.html",
+    "main.8c1859e9.css.map": "/game-of-21/static/css/main.8c1859e9.css.map",
+    "main.3f38f0e4.js.map": "/game-of-21/static/js/main.3f38f0e4.js.map",
+    "787.28d8fdef.chunk.js.map": "/game-of-21/static/js/787.28d8fdef.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c1859e9.css",
+    "static/js/main.3f38f0e4.js"
+  ]
+}

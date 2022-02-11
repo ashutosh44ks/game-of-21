@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.8c1859e9.css","mappings":"AAAA,KACI,wBACJ,CAEA,eACI,YAAa,CACb,kBAAmB,CACnB,eACJ","sources":["index.css"],"sourcesContent":["body{\r\n    background-color: gainsboro;\r\n}\r\n\r\n.CardContainer{\r\n    display: flex;\r\n    flex-direction: row;\r\n    overflow-x: auto;\r\n}\r\n"],"names":[],"sourceRoot":""}
