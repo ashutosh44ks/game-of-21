@@ -3,16 +3,22 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function BasicCard({ item, toggleSelection }) {
+export default function BasicCard({ item, pickChoice }) {
   return (
-    <Button sx={{ margin: "2em" }} onClick={()=>toggleSelection(item.id)}>
+    <Button
+      sx={{ margin: "1em", padding: "0 3em" }}
+      onClick={() => pickChoice(item.id)}
+      disabled={!item.selectable}
+    >
       <Card
         sx={{
           padding: "1em 3em",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: item.selection ? "green" : "white",
+          backgroundColor: item.selectable ? (item.choice?"green":"yellow") : "white",
+          
+
         }}
       >
         <CardContent>
