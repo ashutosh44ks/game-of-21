@@ -3,11 +3,25 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function BasicCard({ item, pickChoice }) {
+export default function BasicCard({ item, onSelect }) {
+  const calcBG = () => {
+    if(item.selectable)
+      return 'yellow';
+    else {
+      if(item.selectedBy==='U')
+        return "green"
+      else if (item.selectedBy==='C')
+        return "blue"
+      else if (item.selectedBy==='N')
+        return "#bfbfbf"
+    }
+    console.log("ERROR")
+    return "white";
+  }
   return (
     <Button
       sx={{ margin: "1em", padding: "0 3em" }}
-      onClick={() => pickChoice(item.id)}
+      onClick={() => onSelect(item.id)}
       disabled={!item.selectable}
     >
       <Card
@@ -16,9 +30,7 @@ export default function BasicCard({ item, pickChoice }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: item.selectable ? (item.choice?"green":"yellow") : "white",
-          
-
+          backgroundColor: calcBG
         }}
       >
         <CardContent>

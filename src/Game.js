@@ -3,58 +3,63 @@ import { useState } from "react";
 
 const Game = () => {
   const [data, setData] = useState([
-    { id: 1, selectable: true, choice: false },
-    { id: 2, selectable: true, choice: false },
-    { id: 3, selectable: true, choice: false },
-    { id: 4, selectable: false, choice: false },
-    { id: 5, selectable: false, choice: false },
-    { id: 6, selectable: false, choice: false },
-    { id: 7, selectable: false, choice: false },
-    { id: 8, selectable: false, choice: false },
-    { id: 9, selectable: false, choice: false },
-    { id: 10, selectable: false, choice: false },
-    { id: 11, selectable: false, choice: false },
-    { id: 12, selectable: false, choice: false },
-    { id: 13, selectable: false, choice: false },
-    { id: 14, selectable: false, choice: false },
-    { id: 15, selectable: false, choice: false },
-    { id: 16, selectable: false, choice: false },
-    { id: 17, selectable: false, choice: false },
-    { id: 18, selectable: false, choice: false },
-    { id: 19, selectable: false, choice: false },
-    { id: 20, selectable: false, choice: false },
-    { id: 21, selectable: false, choice: false },
+    { id: 1, selectable: true, selectedBy: "N" },
+    { id: 2, selectable: true, selectedBy: "N" },
+    { id: 3, selectable: true, selectedBy: "N" },
+    { id: 4, selectable: false, selectedBy: "N" },
+    { id: 5, selectable: false, selectedBy: "N" },
+    { id: 6, selectable: false, selectedBy: "N" },
+    { id: 7, selectable: false, selectedBy: "N" },
+    { id: 8, selectable: false, selectedBy: "N" },
+    { id: 9, selectable: false, selectedBy: "N" },
+    { id: 10, selectable: false, selectedBy: "N" },
+    { id: 11, selectable: false, selectedBy: "N" },
+    { id: 12, selectable: false, selectedBy: "N" },
+    { id: 13, selectable: false, selectedBy: "N" },
+    { id: 14, selectable: false, selectedBy: "N" },
+    { id: 15, selectable: false, selectedBy: "N" },
+    { id: 16, selectable: false, selectedBy: "N" },
+    { id: 17, selectable: false, selectedBy: "N" },
+    { id: 18, selectable: false, selectedBy: "N" },
+    { id: 19, selectable: false, selectedBy: "N" },
+    { id: 20, selectable: false, selectedBy: "N" },
+    { id: 21, selectable: false, selectedBy: "N" },
   ]);
-  //   let count=1;
-  //   const [data, setData] = useState(Array(21).fill({id: count++, selectable: false, choice: false}));
-  const buildSelectables = (id) => {
-    console.log("you chose number " + id);
-    for (let i = id - 3; i < id; i++) {
-      if (data[i] !== undefined) {
-        console.log(`disabling card ${i + 1}`);
-        data[i].selectable = false;
-      }
-    }
-    for (let i = id; i < id + 3; i++) {
-      if (data[i] !== undefined) {
-        console.log(`enabling card ${i + 1}`);
-        data[i].selectable = true;
-      }
-    }
-    //DOUBT - card(id) still not disabled
-  };
-  const pickChoice = (id) => {
+  // const [data, setData] = useState(
+  //   [...Array(21).keys()].map((key) => ({
+  //     id: key + 1,
+  //     selectable: false,
+  //     choice: false,
+  //   }))
+  // );
+  // function start(){
+  //   const temp = [...data];
+  //   for(let i=0; i<3; i++)
+  //     temp[i].selectable=true;
+  //   setData(temp)
+  // }
+
+  const onSelect = (id, player = "U") => {
     setData(
-      data.map((item) =>
-        item.id === id ? { ...item, choice: !item.choice } : item
-      )
+      data.map((item) => {
+        //BUILDING NEW SELECTABLES
+        if (item.id === id - 3 || item.id === id - 2 || item.id === id - 1)
+          item.selectable = false;
+        else if (item.id === id + 3 || item.id === id + 2 || item.id === id + 1)
+          item.selectable = true;
+        //ASSIGNING SELECT
+        if (item.id === id) {
+          item.selectable = false;
+          return { ...item, selectedBy: player };
+        } else return item;
+      })
     );
-    buildSelectables(id);
   };
+  console.log("current data = ", data);
   return (
     <div className="CardContainer">
       {data.map((item) => (
-        <Card key={item.id} item={item} pickChoice={pickChoice} />
+        <Card key={item.id} item={item} onSelect={onSelect} />
       ))}
     </div>
   );
