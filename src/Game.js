@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import Card from "./components/BasicCard";
-import { useState } from "react";
 
 const Game = () => {
   const [data, setData] = useState([
@@ -25,6 +25,8 @@ const Game = () => {
     { id: 20, selectable: false, selectedBy: "N" },
     { id: 21, selectable: false, selectedBy: "N" },
   ]);
+
+  const [playerTurn, setPlayerTurn] = useState(true);
   // const [data, setData] = useState(
   //   [...Array(21).keys()].map((key) => ({
   //     id: key + 1,
@@ -42,20 +44,35 @@ const Game = () => {
   const onSelect = (id, player = "U") => {
     setData(
       data.map((item) => {
-        //BUILDING NEW SELECTABLES
-        if (item.id === id - 3 || item.id === id - 2 || item.id === id - 1)
-          item.selectable = false;
-        else if (item.id === id + 3 || item.id === id + 2 || item.id === id + 1)
+        //RESETTING SELECTABLES
+        // if (item.id === id - 3 || item.id === id - 2 || item.id === id - 1)
+        item.selectable = false;
+        if (item.id === id + 3 || item.id === id + 2 || item.id === id + 1)
           item.selectable = true;
         //ASSIGNING SELECT
         if (item.id === id) {
-          item.selectable = false;
+          // item.selectable = false;
           return { ...item, selectedBy: player };
         } else return item;
       })
     );
+    setPlayerTurn(!playerTurn);
   };
   console.log("current data = ", data);
+
+  useEffect(() => {
+    if (!playerTurn) {
+      //Calculating Computer's move
+      let id;
+      data.forEach((item)=>{
+        if(item.selectable && item.id%4===0)
+          id=item.id;
+      })
+      onSelect(id, "C");
+    }
+  }, [playerTurn])
+  
+
   return (
     <div className="CardContainer">
       {data.map((item) => (

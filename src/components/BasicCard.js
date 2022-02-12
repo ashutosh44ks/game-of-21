@@ -5,8 +5,11 @@ import Button from "@mui/material/Button";
 
 export default function BasicCard({ item, onSelect }) {
   const calcBG = () => {
-    if(item.selectable)
-      return 'yellow';
+    if(item.selectable){
+      if(item.id===21)
+        return "url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcmkt-image-prd.global.ssl.fastly.net%2F0.1.0%2Fps%2F573499%2F2000%2F1332%2Fm1%2Ffpnw%2Fwm1%2Fskull-pattern-.jpg%3F1443460483%26s%3Db0bb824477a2ce057aea05677822cdc4&f=1&nofb=1) center"
+      else return "yellow"
+    }
     else {
       if(item.selectedBy==='U')
         return "green"
@@ -15,7 +18,7 @@ export default function BasicCard({ item, onSelect }) {
       else if (item.selectedBy==='N')
         return "#bfbfbf"
     }
-    console.log("ERROR")
+    console.log("ERROR in calculating bg for card")
     return "white";
   }
   return (
@@ -30,7 +33,9 @@ export default function BasicCard({ item, onSelect }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: calcBG
+          background: calcBG,
+          backgroundSize: "cover",
+          backgroundRepeat: "no repeat",
         }}
       >
         <CardContent>
