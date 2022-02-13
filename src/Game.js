@@ -33,7 +33,7 @@ const Game = () => {
   });
 
   const [playerTurn, setPlayerTurn] = useState(true);
-  const [result, setResult] = useState("GAME ON");
+  const [result, setResult] = useState("");
   // const [data, setData] = useState(
   //   [...Array(21).keys()].map((key) => ({
   //     id: key + 1,
@@ -77,12 +77,7 @@ const Game = () => {
   useEffect(() => {
     if (!playerTurn) {
       //Calculating Computer's move
-      randomSelect(); //UI effect of Computer picking his choice
-      // let id;
-      // data.forEach((item) => {
-      //   if (item.selectable && item.id % 4 === 0) id = item.id;
-      // });
-      // onSelect(id, "C");
+      randomSelect();
     }
     calcResult();
   }, [playerTurn]);
@@ -96,45 +91,43 @@ const Game = () => {
         setResult("You WIN");
         break;
       default:
+        console.log(data[20].selectedBy)
+        setResult(playerTurn?"Your Turn":"CPU's Turn")
     }
   };
 
   function randomSelect() {
     const times = 30; //the 30th element will be the final
-
-    //Highlight <-> Unhighlight Process
-    const interval = setInterval(() => {
-      const randomCard = pickRandomCard();
-      highlightCard(randomCard);
-
-      setTimeout(() => {
-        unhighlightCard(randomCard);
-      }, 100); //In equal time as setInterval so as when we move to next card, this gets unhighlighted
-    }, 100);
-
-    //To finally stop on one choice
-    setTimeout(() => {
-      clearInterval(interval); //stops interval from the process of highlighting and unhighlighting
-
-      setTimeout(() => {
-        //PROBLEM - HIGHLIGHTING NUM PE KAAM KRTI HAI ID PE NHI, find NUM OF %4
-        const cards = data.filter((item) => item.selectable);
-        let num;
-        cards.forEach((card,i)=>{
-          if(card.id%4===0)
-            num=i;
-        })
-        let id;
-        data.forEach((item) => {
-          if (item.selectable && item.id % 4 === 0) id = item.id;
-        });
-        highlightCard(num);
+    setTimeout(()=>{//Highlight <-> Unhighlight Process
+      const interval = setInterval(() => {
+        const randomCard = pickRandomCard();
+        highlightCard(randomCard);
+  
         setTimeout(() => {
-          unhighlightCard(num);
-          onSelect(id, "C");
-        }, 500);
-      }, 100); //runs after 100ms (which continues the standard of 100ms from above interval)
-    }, times * 100); //runs after 30 intervals of 100ms each
+          unhighlightCard(randomCard);
+        }, 100); //In equal time as setInterval so as when we move to next card, this gets unhighlighted
+      }, 100);
+  
+      //To finally stop on one choice
+      setTimeout(() => {
+        clearInterval(interval); //stops interval from the process of highlighting and unhighlighting
+  
+        setTimeout(() => {
+          //PROBLEM - HIGHLIGHTING NUM PE KAAM KRTI HAI ID PE NHI, find NUM OF %4
+          const cards = data.filter((item) => item.selectable);
+          let indexOfFinalCard;
+          cards.forEach((card,i)=>{
+            if(card.id%4===0)
+              indexOfFinalCard=i;
+          })
+          highlightCard(indexOfFinalCard);
+          setTimeout(() => {
+            unhighlightCard(indexOfFinalCard);
+            onSelect(cards[indexOfFinalCard].id, "C");
+          }, 500);
+        }, 100); //runs after 100ms (which continues the standard of 100ms from above interval)
+      }, times * 100); //runs after 30 intervals of 100ms each
+    },500)  //wait for a second for user to absorb the change in cards in front of him
   }
 
   function pickRandomCard() {
