@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "./components/BasicCard";
+import Typography from '@mui/material/Typography';
 
 const Game = () => {
   const [data, setData] = useState([
@@ -27,6 +28,7 @@ const Game = () => {
   ]);
 
   const [playerTurn, setPlayerTurn] = useState(true);
+  const [result, setResult] = useState("GAME ON");
   // const [data, setData] = useState(
   //   [...Array(21).keys()].map((key) => ({
   //     id: key + 1,
@@ -64,21 +66,34 @@ const Game = () => {
     if (!playerTurn) {
       //Calculating Computer's move
       let id;
-      data.forEach((item)=>{
-        if(item.selectable && item.id%4===0)
-          id=item.id;
-      })
+      data.forEach((item) => {
+        if (item.selectable && item.id % 4 === 0) id = item.id;
+      });
       onSelect(id, "C");
     }
-  }, [playerTurn])
-  
-
+    calcResult();
+  }, [playerTurn]);
+  const calcResult = () => {
+    switch (data[20].selectedBy) {
+      case "U":
+        setResult("You LOSE")
+        break;
+      case "C":
+        setResult("You WIN");
+        break;
+      default:
+        console.log("ERROR IN RESULT")
+    }
+  };
   return (
-    <div className="CardContainer">
-      {data.map((item) => (
-        <Card key={item.id} item={item} onSelect={onSelect} />
-      ))}
-    </div>
+    <>
+      <div className="CardContainer">
+        {data.map((item) => (
+          <Card key={item.id} item={item} onSelect={onSelect} />
+        ))}
+      </div>
+      <Typography variant="h3" sx={{textAlign: "center", padding: "3em"}}>{result}</Typography>
+    </>
   );
 };
 
