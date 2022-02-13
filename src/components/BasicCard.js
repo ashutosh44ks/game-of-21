@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export default function BasicCard({ item, onSelect }) {
+  console.log(item)
   const calcBG = () => {
     if(item.selectable){
       if(item.id===21)
@@ -23,13 +24,13 @@ export default function BasicCard({ item, onSelect }) {
   }
   return (
     <Button
-      sx={{ margin: "1em", padding: "0 3em" }}
+      sx={{ margin: "1em" }}
       onClick={() => onSelect(item.id)}
       disabled={!item.selectable}
     >
       <Card
         sx={{
-          padding: "1em 3em",
+          padding: "2em 2em",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

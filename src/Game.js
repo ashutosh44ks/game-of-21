@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "./components/BasicCard";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
 const Game = () => {
   const [data, setData] = useState([
@@ -26,6 +26,10 @@ const Game = () => {
     { id: 20, selectable: false, selectedBy: "N" },
     { id: 21, selectable: false, selectedBy: "N" },
   ]);
+  const [secondary, setSecondary] = useState({
+    prev: { id: "X", selectable: false, selectedBy: "N" },
+    next: data[3],
+  });
 
   const [playerTurn, setPlayerTurn] = useState(true);
   const [result, setResult] = useState("GAME ON");
@@ -44,21 +48,28 @@ const Game = () => {
   // }
 
   const onSelect = (id, player = "U") => {
-    setData(
-      data.map((item) => {
-        //RESETTING SELECTABLES
-        // if (item.id === id - 3 || item.id === id - 2 || item.id === id - 1)
-        item.selectable = false;
-        if (item.id === id + 3 || item.id === id + 2 || item.id === id + 1)
-          item.selectable = true;
-        //ASSIGNING SELECT
-        if (item.id === id) {
-          // item.selectable = false;
-          return { ...item, selectedBy: player };
-        } else return item;
-      })
-    );
-    setPlayerTurn(!playerTurn);
+    const tempData = data.map((item) => {
+      //RESETTING SELECTABLES
+      // if (item.id === id - 3 || item.id === id - 2 || item.id === id - 1)
+      item.selectable = false;
+      if (item.id === id + 3 || item.id === id + 2 || item.id === id + 1)
+        item.selectable = true;
+      //ASSIGNING SELECT
+      if (item.id === id) {
+        // item.selectable = false;
+        return { ...item, selectedBy: player };
+      } else return item;
+    });
+
+    setSecondary({
+      prev: tempData[id - 1],
+      next:
+        id + 3 < 21
+          ? tempData[id + 3]
+          : { id: "X", selectable: false, selectedBy: "N" },
+    });
+    setPlayerTurn(id !== 21 ? !playerTurn : playerTurn);
+    setData(tempData);
   };
   console.log("current data = ", data);
 
@@ -76,23 +87,31 @@ const Game = () => {
   const calcResult = () => {
     switch (data[20].selectedBy) {
       case "U":
-        setResult("You LOSE")
+        setResult("You LOSE");
         break;
       case "C":
         setResult("You WIN");
         break;
       default:
-        console.log("ERROR IN RESULT")
     }
   };
+
   return (
     <>
-      <div className="CardContainer">
-        {data.map((item) => (
-          <Card key={item.id} item={item} onSelect={onSelect} />
-        ))}
+      <div className="CardContainer-Primary">
+        {data
+          .filter((item) => item.selectable)
+          .map((item) => (
+            <Card key={item.id} item={item} onSelect={onSelect} />
+          ))}
       </div>
-      <Typography variant="h3" sx={{textAlign: "center", padding: "3em"}}>{result}</Typography>
+      <div className="CardContainer-Secondary">
+        <Card item={secondary.prev} />
+        <Typography variant="h3" sx={{ textAlign: "center", padding: "3em" }}>
+          {result}
+        </Typography>
+        <Card item={secondary.next} />
+      </div>
     </>
   );
 };

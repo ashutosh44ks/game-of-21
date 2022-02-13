@@ -2,8 +2,14 @@ body{
     background-color: gainsboro;
 }
 
-.CardContainer{
+.CardContainer-Primary{
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
+    justify-content: center;
+}
+
+.CardContainer-Secondary{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
