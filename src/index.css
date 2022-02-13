@@ -13,3 +13,7 @@ body{
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.randomSelect {
+    background-color: blue !important;
+}

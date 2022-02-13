@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./components/BasicCard";
 import Typography from "@mui/material/Typography";
+import { cardClasses } from "@mui/material";
 
 const Game = () => {
   const [data, setData] = useState([
@@ -76,14 +77,16 @@ const Game = () => {
   useEffect(() => {
     if (!playerTurn) {
       //Calculating Computer's move
-      let id;
-      data.forEach((item) => {
-        if (item.selectable && item.id % 4 === 0) id = item.id;
-      });
-      onSelect(id, "C");
+      randomSelect(); //UI effect of Computer picking his choice
+      // let id;
+      // data.forEach((item) => {
+      //   if (item.selectable && item.id % 4 === 0) id = item.id;
+      // });
+      // onSelect(id, "C");
     }
     calcResult();
   }, [playerTurn]);
+
   const calcResult = () => {
     switch (data[20].selectedBy) {
       case "U":
@@ -95,6 +98,57 @@ const Game = () => {
       default:
     }
   };
+
+  function randomSelect() {
+    const times = 30; //the 30th element will be the final
+
+    //Highlight <-> Unhighlight Process
+    const interval = setInterval(() => {
+      const randomCard = pickRandomCard();
+      highlightCard(randomCard);
+
+      setTimeout(() => {
+        unhighlightCard(randomCard);
+      }, 100); //In equal time as setInterval so as when we move to next card, this gets unhighlighted
+    }, 100);
+
+    //To finally stop on one choice
+    setTimeout(() => {
+      clearInterval(interval); //stops interval from the process of highlighting and unhighlighting
+
+      setTimeout(() => {
+        //PROBLEM - HIGHLIGHTING NUM PE KAAM KRTI HAI ID PE NHI, find NUM OF %4
+        const cards = data.filter((item) => item.selectable);
+        let num;
+        cards.forEach((card,i)=>{
+          if(card.id%4===0)
+            num=i;
+        })
+        let id;
+        data.forEach((item) => {
+          if (item.selectable && item.id % 4 === 0) id = item.id;
+        });
+        highlightCard(num);
+        setTimeout(() => {
+          unhighlightCard(num);
+          onSelect(id, "C");
+        }, 500);
+      }, 100); //runs after 100ms (which continues the standard of 100ms from above interval)
+    }, times * 100); //runs after 30 intervals of 100ms each
+  }
+
+  function pickRandomCard() {
+    return Math.floor(Math.random() * 3);
+  }
+
+  function highlightCard(n) {
+    const selectableCards = document.querySelectorAll(".selectable");
+    selectableCards[n].classList.add("randomSelect");
+  }
+  function unhighlightCard(n) {
+    const selectableCards = document.querySelectorAll(".selectable");
+    selectableCards[n].classList.remove("randomSelect");
+  }
 
   return (
     <>

@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export default function BasicCard({ item, onSelect }) {
-  console.log(item)
   const calcBG = () => {
     if(item.selectable){
       if(item.id===21)
@@ -38,6 +37,7 @@ export default function BasicCard({ item, onSelect }) {
           backgroundSize: "cover",
           backgroundRepeat: "no repeat",
         }}
+        className={item.selectable?"selectable":""}
       >
         <CardContent>
           <Typography sx={{ fontSize: 50 }} color="text.primary">
