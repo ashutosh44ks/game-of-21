@@ -76,26 +76,25 @@ const Game = () => {
   useEffect(() => {
     console.log("current data = ", data);
     if (!playerTurn) {
-      document.querySelector('body').style.pointerEvents="none" 
       //Calculating Computer's move
       randomSelect();
     }
   }, [playerTurn]);
   useEffect(()=>{
-    const calcResult = () => {
-      switch (data[20].selectedBy) {
-        case "U":
-          setResult("You LOSE");
-          break;
-        case "C":
-          setResult("You WIN");
-          break;
-        default:
-          setResult(playerTurn?"Your Turn":"CPU's Turn")
-      }
-    };
+    calcResult();
   })
-  
+  const calcResult = () => {
+    switch (data[20].selectedBy) {
+      case "U":
+        setResult("You LOSE");
+        break;
+      case "C":
+        setResult("You WIN");
+        break;
+      default:
+        setResult(playerTurn?"Your Turn":"CPU's Turn")
+    }
+  };
 
   function randomSelect() {
     const times = 30; //the 30th element will be the final

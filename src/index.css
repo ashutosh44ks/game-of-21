@@ -1,19 +1,23 @@
 body{
     background-color: gainsboro;
 }
+.randomSelect {
+    background-color: blue !important;
+}
 
-.CardContainer-Primary{
+.container-primary{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 2em;
 }
 
-.CardContainer-Secondary{
+.container-secondary{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    max-height: 17em;
 }
-
-.randomSelect {
-    background-color: blue !important;
+.secondary-cards {
+    text-align: center;
 }

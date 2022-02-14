@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function BasicCard({ item, onSelect, type }) {
+export default function BasicCard({ item, onSelect }) {
   const calcBG = () => {
     if (item.selectable) {
       return "yellow";
@@ -35,11 +35,6 @@ export default function BasicCard({ item, onSelect, type }) {
           <Typography sx={{ fontSize: 50 }} color="text.primary">
             {item.id}
           </Typography>
-          {type===""? (
-            <></>
-          ) : (
-            <Typography sx={{ fontSize: 10 }} color="text.secondary">{type}</Typography>
-          )}
         </CardContent>
       </Card>
     </Button>
