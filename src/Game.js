@@ -76,8 +76,11 @@ const Game = () => {
   useEffect(() => {
     console.log("current data = ", data);
     if (!playerTurn) {
+      document.querySelector('body').style.pointerEvents="none" ; //disable user interaction till computer chooses his move
       //Calculating Computer's move
       randomSelect();
+    } else {
+      document.querySelector('body').style.pointerEvents="all" ;
     }
   }, [playerTurn]);
   useEffect(()=>{

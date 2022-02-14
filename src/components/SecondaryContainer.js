@@ -8,7 +8,7 @@ const SecondaryContainer = ({ secondary, result }) => {
       <div className="secondary-cards">
         <Card item={secondary.prev} />
         <Typography sx={{ fontSize: 15 }} color="text.primary">
-          Last selected card shows here
+          Last selected card
         </Typography>
       </div>
       <Typography variant="h3" sx={{ textAlign: "center", padding: "1.5em" }}>
@@ -17,7 +17,7 @@ const SecondaryContainer = ({ secondary, result }) => {
       <div className="secondary-cards">
         <Card item={secondary.next} />
         <Typography sx={{ fontSize: 15 }} color="text.primary">
-          Next card in line is shown here
+          Next card in line
         </Typography>
       </div>
     </div>
