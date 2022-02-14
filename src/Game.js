@@ -1,9 +1,21 @@
 import { useEffect, useState } from "react";
-import Card from "./components/BasicCard";
-import Typography from "@mui/material/Typography";
-import { cardClasses } from "@mui/material";
+import PrimaryContainer from "./components/PrimaryContainer";
+import SecondaryContainer from "./components/SecondaryContainer";
 
 const Game = () => {
+  // const [data, setData] = useState(
+  //   [...Array(21).keys()].map((key) => ({
+  //     id: key + 1,
+  //     selectable: false,
+  //     choice: false,
+  //   }))
+  // );
+  // function start(){
+  //   const temp = [...data];
+  //   for(let i=0; i<3; i++)
+  //     temp[i].selectable=true;
+  //   setData(temp)
+  // }
   const [data, setData] = useState([
     { id: 1, selectable: true, selectedBy: "N" },
     { id: 2, selectable: true, selectedBy: "N" },
@@ -27,26 +39,14 @@ const Game = () => {
     { id: 20, selectable: false, selectedBy: "N" },
     { id: 21, selectable: false, selectedBy: "N" },
   ]);
+
   const [secondary, setSecondary] = useState({
     prev: { id: "X", selectable: false, selectedBy: "N" },
     next: data[3],
   });
-
   const [playerTurn, setPlayerTurn] = useState(true);
   const [result, setResult] = useState("");
-  // const [data, setData] = useState(
-  //   [...Array(21).keys()].map((key) => ({
-  //     id: key + 1,
-  //     selectable: false,
-  //     choice: false,
-  //   }))
-  // );
-  // function start(){
-  //   const temp = [...data];
-  //   for(let i=0; i<3; i++)
-  //     temp[i].selectable=true;
-  //   setData(temp)
-  // }
+  
 
   const onSelect = (id, player = "U") => {
     const tempData = data.map((item) => {
@@ -72,34 +72,35 @@ const Game = () => {
     setPlayerTurn(id !== 21 ? !playerTurn : playerTurn);
     setData(tempData);
   };
-  console.log("current data = ", data);
 
   useEffect(() => {
+    console.log("current data = ", data);
     if (!playerTurn) {
+      document.querySelector('body').style.pointerEvents="none" 
       //Calculating Computer's move
       randomSelect();
     }
   }, [playerTurn]);
   useEffect(()=>{
-    calcResult();
+    const calcResult = () => {
+      switch (data[20].selectedBy) {
+        case "U":
+          setResult("You LOSE");
+          break;
+        case "C":
+          setResult("You WIN");
+          break;
+        default:
+          setResult(playerTurn?"Your Turn":"CPU's Turn")
+      }
+    };
   })
-  const calcResult = () => {
-    switch (data[20].selectedBy) {
-      case "U":
-        setResult("You LOSE");
-        break;
-      case "C":
-        setResult("You WIN");
-        break;
-      default:
-        console.log(data[20].selectedBy)
-        setResult(playerTurn?"Your Turn":"CPU's Turn")
-    }
-  };
+  
 
   function randomSelect() {
     const times = 30; //the 30th element will be the final
-    setTimeout(()=>{//Highlight <-> Unhighlight Process
+    setTimeout(()=>{     
+      //Highlight <-> Unhighlight Process
       const interval = setInterval(() => {
         const randomCard = pickRandomCard();
         highlightCard(randomCard);
@@ -146,20 +147,8 @@ const Game = () => {
 
   return (
     <>
-      <div className="CardContainer-Primary">
-        {data
-          .filter((item) => item.selectable)
-          .map((item) => (
-            <Card key={item.id} item={item} onSelect={onSelect} />
-          ))}
-      </div>
-      <div className="CardContainer-Secondary">
-        <Card item={secondary.prev} />
-        <Typography variant="h3" sx={{ textAlign: "center", padding: "3em" }}>
-          {result}
-        </Typography>
-        <Card item={secondary.next} />
-      </div>
+      <PrimaryContainer data={data} onSelect={onSelect}/>
+      <SecondaryContainer secondary={secondary} result={result}/>
     </>
   );
 };
