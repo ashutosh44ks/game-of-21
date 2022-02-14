@@ -20,7 +20,7 @@ const Rules = () => {
           <Typography>Rules</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography component="div">
             <ol>
               <li>You select a card</li>
               <li>CPU selects a card</li>
@@ -39,7 +39,7 @@ const Rules = () => {
           <Typography>Color Code</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography component="div">
             <p>Yellow - Selectable Card</p>
             <p>Grey - Non-Selectable Card</p>
             <p>Green - Card chosen by You</p>

@@ -4,6 +4,14 @@ body{
 .randomSelect {
     background-color: dodgerblue !important;
 }
+.randomSelect > div > p{
+    color: gainsboro !important;
+}
+
+/* modal box */
+.MuiBox-root.css-h5hfv8:focus{
+    outline:none;
+}
 
 .container-primary{
     display: flex;

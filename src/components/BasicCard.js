@@ -32,7 +32,10 @@ export default function BasicCard({ item, onSelect }) {
         className={item.selectable ? "selectable" : ""}
       >
         <CardContent>
-          <Typography sx={{ fontSize: 50 }} color="text.primary">
+          <Typography
+            sx={{ fontSize: 50 }}
+            color={item.selectedBy === "C" ? "gainsboro" : "text.primary"}
+          >
             {item.id}
           </Typography>
         </CardContent>
