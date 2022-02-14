@@ -79,9 +79,10 @@ const Game = () => {
       //Calculating Computer's move
       randomSelect();
     }
-    calcResult();
   }, [playerTurn]);
-
+  useEffect(()=>{
+    calcResult();
+  })
   const calcResult = () => {
     switch (data[20].selectedBy) {
       case "U":
