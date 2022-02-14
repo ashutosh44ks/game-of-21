@@ -1,10 +1,11 @@
-import Game from './Game'
+import Game from "./Game";
+import HelpBtn from "./components/HelpBtn";
 
 function App() {
-  
   return (
     <div className="App">
-      <Game/>
+      <HelpBtn />
+      <Game />
     </div>
   );
 }

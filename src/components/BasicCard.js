@@ -5,41 +5,37 @@ import Button from "@mui/material/Button";
 
 export default function BasicCard({ item, onSelect }) {
   const calcBG = () => {
-    if(item.selectable){
-      if(item.id===21)
-        return "url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcmkt-image-prd.global.ssl.fastly.net%2F0.1.0%2Fps%2F573499%2F2000%2F1332%2Fm1%2Ffpnw%2Fwm1%2Fskull-pattern-.jpg%3F1443460483%26s%3Db0bb824477a2ce057aea05677822cdc4&f=1&nofb=1) center"
-      else return "yellow"
+    if (item.selectable) {
+      return "yellow";
+    } else {
+      if (item.selectedBy === "U") return "lawngreen";
+      else if (item.selectedBy === "C") return "dodgerblue";
+      else if (item.selectedBy === "N") return "#bfbfbf";
     }
-    else {
-      if(item.selectedBy==='U')
-        return "green"
-      else if (item.selectedBy==='C')
-        return "blue"
-      else if (item.selectedBy==='N')
-        return "#bfbfbf"
-    }
-    console.log("ERROR in calculating bg for card")
+    console.log("ERROR in calculating bg for card");
     return "white";
-  }
+  };
   return (
     <Button
-      sx={{ margin: "1em", padding: "0 3em" }}
+      sx={{ margin: "1em" }}
       onClick={() => onSelect(item.id)}
       disabled={!item.selectable}
     >
       <Card
         sx={{
-          padding: "1em 3em",
+          padding: "2em 2em",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: calcBG,
-          backgroundSize: "cover",
-          backgroundRepeat: "no repeat",
+          backgroundColor: calcBG,
         }}
+        className={item.selectable ? "selectable" : ""}
       >
         <CardContent>
-          <Typography sx={{ fontSize: 50 }} color="text.primary">
+          <Typography
+            sx={{ fontSize: 50 }}
+            color={item.selectedBy === "C" ? "gainsboro" : "text.primary"}
+          >
             {item.id}
           </Typography>
         </CardContent>

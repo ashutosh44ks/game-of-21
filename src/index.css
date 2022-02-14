@@ -1,9 +1,31 @@
 body{
     background-color: gainsboro;
 }
+.randomSelect {
+    background-color: dodgerblue !important;
+}
+.randomSelect > div > p{
+    color: gainsboro !important;
+}
 
-.CardContainer{
+/* modal box */
+.MuiBox-root.css-h5hfv8:focus{
+    outline:none;
+}
+
+.container-primary{
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
+    justify-content: center;
+    margin: 2em;
+}
+
+.container-secondary{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-height: 17em;
+}
+.secondary-cards {
+    text-align: center;
 }
