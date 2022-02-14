@@ -8,8 +8,8 @@ export default function BasicCard({ item, onSelect }) {
     if (item.selectable) {
       return "yellow";
     } else {
-      if (item.selectedBy === "U") return "green";
-      else if (item.selectedBy === "C") return "blue";
+      if (item.selectedBy === "U") return "lawngreen";
+      else if (item.selectedBy === "C") return "dodgerblue";
       else if (item.selectedBy === "N") return "#bfbfbf";
     }
     console.log("ERROR in calculating bg for card");
