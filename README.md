@@ -15,6 +15,7 @@ Whoever has to pick card 21 loses the game.
 </ol>
 Selection of card has to be done from the 3 immediate next cards of the last selected card
 
+## ([Click here to play](https://ashutosh44ks.github.io/game-of-21/))
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Getting Started with Create React App
