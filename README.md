@@ -1,3 +1,22 @@
+# Game of 21
+
+## What is the game about?
+We've a deck of 21 cards from 1 to 21.
+You play against a computer by selecting a card.
+Selection of card has to be done from the 3 immediate next cards of the last selected card.
+Whoever has to pick card 21 loses the game.
+
+## How to play?
+<ol>
+  <li>You select a card</li>
+  <li>CPU selects a card</li>
+  <li>Repeat 1 and 2 till card selected is 21</li>
+  <li>Whoever selects card #21 loses</li>
+</ol>
+Selection of card has to be done from the 3 immediate next cards of the last selected card
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
