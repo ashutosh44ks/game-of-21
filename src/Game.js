@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PrimaryContainer from "./components/PrimaryContainer";
 import SecondaryContainer from "./components/SecondaryContainer";
 
-const Game = ({ data, setData }) => {
+const Game = ({ data, setData, secondary, setSecondary }) => {
   // const [data, setData] = useState(
   //   [...Array(21).keys()].map((key) => ({
   //     id: key + 1,
@@ -17,10 +17,6 @@ const Game = ({ data, setData }) => {
   //   setData(temp)
   // }
 
-  const [secondary, setSecondary] = useState({
-    prev: { id: "X", selectable: false, selectedBy: "N" },
-    next: data[3],
-  });
   const [playerTurn, setPlayerTurn] = useState(true);
   const [result, setResult] = useState("");
 

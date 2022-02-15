@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Game from "./Game";
 import HelpBtn from "./components/HelpBtn";
 import RestartBtn from "./components/RestartBtn";
@@ -50,14 +50,22 @@ function App() {
     { id: 20, selectable: false, selectedBy: "N" },
     { id: 21, selectable: false, selectedBy: "N" },
   ];
+  const [secondary, setSecondary] = useState({
+    prev: { id: "X", selectable: false, selectedBy: "N" },
+    next: data[3],
+  });
   const reset = () => {
     setData(originalData)
+    setSecondary({
+      prev: { id: "X", selectable: false, selectedBy: "N" },
+      next: originalData[3],
+    })
   }
   return (
     <div className="App">
       <RestartBtn reset={reset}/>
       <HelpBtn />
-      <Game data={data} setData={setData} />
+      <Game data={data} setData={setData} secondary={secondary} setSecondary={setSecondary}/>
     </div>
   );
 }
