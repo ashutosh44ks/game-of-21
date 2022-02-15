@@ -24,6 +24,14 @@ const HelpBtn = () => {
           <Typography variant="h5" sx={{ textAlign: "center", mb: "1em" }}>
             Rules and Info
           </Typography>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleClose}
+            style={{ position: "absolute", right: "1em", top: "2em" }}
+          >
+            Close
+          </Button>
           <Rules />
         </Box>
       </Modal>

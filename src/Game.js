@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PrimaryContainer from "./components/PrimaryContainer";
 import SecondaryContainer from "./components/SecondaryContainer";
 
-const Game = () => {
+const Game = ({ data, setData }) => {
   // const [data, setData] = useState(
   //   [...Array(21).keys()].map((key) => ({
   //     id: key + 1,
@@ -16,29 +16,6 @@ const Game = () => {
   //     temp[i].selectable=true;
   //   setData(temp)
   // }
-  const [data, setData] = useState([
-    { id: 1, selectable: true, selectedBy: "N" },
-    { id: 2, selectable: true, selectedBy: "N" },
-    { id: 3, selectable: true, selectedBy: "N" },
-    { id: 4, selectable: false, selectedBy: "N" },
-    { id: 5, selectable: false, selectedBy: "N" },
-    { id: 6, selectable: false, selectedBy: "N" },
-    { id: 7, selectable: false, selectedBy: "N" },
-    { id: 8, selectable: false, selectedBy: "N" },
-    { id: 9, selectable: false, selectedBy: "N" },
-    { id: 10, selectable: false, selectedBy: "N" },
-    { id: 11, selectable: false, selectedBy: "N" },
-    { id: 12, selectable: false, selectedBy: "N" },
-    { id: 13, selectable: false, selectedBy: "N" },
-    { id: 14, selectable: false, selectedBy: "N" },
-    { id: 15, selectable: false, selectedBy: "N" },
-    { id: 16, selectable: false, selectedBy: "N" },
-    { id: 17, selectable: false, selectedBy: "N" },
-    { id: 18, selectable: false, selectedBy: "N" },
-    { id: 19, selectable: false, selectedBy: "N" },
-    { id: 20, selectable: false, selectedBy: "N" },
-    { id: 21, selectable: false, selectedBy: "N" },
-  ]);
 
   const [secondary, setSecondary] = useState({
     prev: { id: "X", selectable: false, selectedBy: "N" },
@@ -46,7 +23,6 @@ const Game = () => {
   });
   const [playerTurn, setPlayerTurn] = useState(true);
   const [result, setResult] = useState("");
-  
 
   const onSelect = (id, player = "U") => {
     const tempData = data.map((item) => {
@@ -76,16 +52,16 @@ const Game = () => {
   useEffect(() => {
     console.log("current data = ", data);
     if (!playerTurn) {
-      document.querySelector('body').style.pointerEvents="none" ; //disable user interaction till computer chooses his move
+      document.querySelector("body").style.pointerEvents = "none"; //disable user interaction till computer chooses his move
       //Calculating Computer's move
       randomSelect();
     } else {
-      document.querySelector('body').style.pointerEvents="all" ;
+      document.querySelector("body").style.pointerEvents = "all";
     }
   }, [playerTurn]);
-  useEffect(()=>{
+  useEffect(() => {
     calcResult();
-  })
+  });
   const calcResult = () => {
     switch (data[20].selectedBy) {
       case "U":
@@ -95,35 +71,34 @@ const Game = () => {
         setResult("You WIN");
         break;
       default:
-        setResult(playerTurn?"Your Turn":"CPU's Turn")
+        setResult(playerTurn ? "Your Turn" : "CPU's Turn");
     }
   };
 
   function randomSelect() {
     const times = 30; //the 30th element will be the final
-    setTimeout(()=>{     
+    setTimeout(() => {
       //Highlight <-> Unhighlight Process
       const interval = setInterval(() => {
         const randomCard = pickRandomCard();
         highlightCard(randomCard);
-  
+
         setTimeout(() => {
           unhighlightCard(randomCard);
         }, 100); //In equal time as setInterval so as when we move to next card, this gets unhighlighted
       }, 100);
-  
+
       //To finally stop on one choice
       setTimeout(() => {
         clearInterval(interval); //stops interval from the process of highlighting and unhighlighting
-  
+
         setTimeout(() => {
           //PROBLEM - HIGHLIGHTING NUM PE KAAM KRTI HAI ID PE NHI, find NUM OF %4
           const cards = data.filter((item) => item.selectable);
           let indexOfFinalCard;
-          cards.forEach((card,i)=>{
-            if(card.id%4===0)
-              indexOfFinalCard=i;
-          })
+          cards.forEach((card, i) => {
+            if (card.id % 4 === 0) indexOfFinalCard = i;
+          });
           highlightCard(indexOfFinalCard);
           setTimeout(() => {
             unhighlightCard(indexOfFinalCard);
@@ -131,7 +106,7 @@ const Game = () => {
           }, 500);
         }, 100); //runs after 100ms (which continues the standard of 100ms from above interval)
       }, times * 100); //runs after 30 intervals of 100ms each
-    },500)  //wait for a second for user to absorb the change in cards in front of him
+    }, 500); //wait for a second for user to absorb the change in cards in front of him
   }
 
   function pickRandomCard() {
@@ -149,8 +124,8 @@ const Game = () => {
 
   return (
     <>
-      <PrimaryContainer data={data} onSelect={onSelect}/>
-      <SecondaryContainer secondary={secondary} result={result}/>
+      <PrimaryContainer data={data} onSelect={onSelect} />
+      <SecondaryContainer secondary={secondary} result={result} />
     </>
   );
 };
