@@ -10,7 +10,7 @@ const SecondaryContainer = ({ secondary, result }) => {
           Last selected card
         </Typography>
       </div>
-      <Typography variant="h3" sx={{ textAlign: "center", padding: "1.5em" }}>
+      <Typography variant="h3" className="result-turn">
         {result}
       </Typography>
       <div className="secondary-cards">

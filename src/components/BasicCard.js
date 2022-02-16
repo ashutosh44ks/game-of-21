@@ -17,19 +17,15 @@ export default function BasicCard({ item, onSelect }) {
   };
   return (
     <Button
-      sx={{ margin: "1em" }}
+      className="card-btn"
       onClick={() => onSelect(item.id)}
       disabled={!item.selectable}
     >
       <Card
         sx={{
-          padding: "2em 2em",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           backgroundColor: calcBG,
         }}
-        className={item.selectable ? "selectable" : ""}
+        className={item.selectable ? "selectable card" : "card"}
       >
         <CardContent>
           <Typography
