@@ -15,6 +15,16 @@ body {
 }
 
 /* modal box */
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    background-color: whitesmoke;
+    border-radius: 0.2em;
+    padding: 2em;
+}
 .MuiBox-root.css-h5hfv8:focus {
   outline: none;
 }
@@ -43,6 +53,18 @@ body {
   text-align: center;
 }
 
+@media all and (max-width: 1080px) {
+  .App {
+    margin-top: 4em;
+  }
+  .container-secondary{
+    margin-top: 4em;
+  }
+  .modal {
+    width: 50vh;
+  }
+}
+
 @media all and (max-width: 580px) {
   .card {
     padding: 1em 1em;
@@ -57,6 +79,12 @@ body {
     margin: 0em !important;
   }
   .App {
-    margin-top: 3em;
+    margin-top: 4em;
+  }
+  .container-secondary{
+    margin-top: 4em;
+  }
+  .modal {
+    width: 40vh;
   }
 }
