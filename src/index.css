@@ -25,7 +25,7 @@ body {
     border-radius: 0.2em;
     padding: 2em;
 }
-.MuiBox-root.css-h5hfv8:focus {
+.modal:focus {
   outline: none;
 }
 
