@@ -2,6 +2,7 @@ import { useState } from "react";
 import Game from "./Game";
 import HelpBtn from "./components/HelpBtn";
 import RestartBtn from "./components/RestartBtn";
+import Score from "./components/ScoreBtn";
 
 function App() {
   const [data, setData] = useState([
@@ -55,17 +56,24 @@ function App() {
     next: data[3],
   });
   const reset = () => {
-    setData(originalData)
+    setData(originalData);
     setSecondary({
       prev: { id: "X", selectable: false, selectedBy: "N" },
       next: originalData[3],
-    })
-  }
+    });
+  };
+  const [score, setScore] = useState([0, 0]);
   return (
     <div className="App">
-      <RestartBtn reset={reset}/>
+      <RestartBtn reset={reset} score={score} setScore={setScore} />
       <HelpBtn />
-      <Game data={data} setData={setData} secondary={secondary} setSecondary={setSecondary}/>
+      <Game
+        data={data}
+        setData={setData}
+        secondary={secondary}
+        setSecondary={setSecondary}
+      />
+      <Score score={score} setScore={setScore} />
     </div>
   );
 }

@@ -27,6 +27,7 @@ const HelpBtn = () => {
           <Button
             variant="outlined"
             color="error"
+            className="modal-close"
             onClick={handleClose}
             style={{ position: "absolute", right: "1em", top: "2em" }}
           >
