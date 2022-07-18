@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/game-of-21/static/css/main.d5918844.css",
-    "main.js": "/game-of-21/static/js/main.b34e46dd.js",
+    "main.css": "/game-of-21/static/css/main.972c40ad.css",
+    "main.js": "/game-of-21/static/js/main.3dcf04c9.js",
     "static/js/787.28d8fdef.chunk.js": "/game-of-21/static/js/787.28d8fdef.chunk.js",
     "index.html": "/game-of-21/index.html",
-    "main.d5918844.css.map": "/game-of-21/static/css/main.d5918844.css.map",
-    "main.b34e46dd.js.map": "/game-of-21/static/js/main.b34e46dd.js.map",
+    "main.972c40ad.css.map": "/game-of-21/static/css/main.972c40ad.css.map",
+    "main.3dcf04c9.js.map": "/game-of-21/static/js/main.3dcf04c9.js.map",
     "787.28d8fdef.chunk.js.map": "/game-of-21/static/js/787.28d8fdef.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d5918844.css",
-    "static/js/main.b34e46dd.js"
+    "static/css/main.972c40ad.css",
+    "static/js/main.3dcf04c9.js"
   ]
 }
